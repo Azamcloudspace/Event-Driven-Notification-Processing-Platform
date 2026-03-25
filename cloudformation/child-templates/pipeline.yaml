@@ -78,7 +78,7 @@ Resources:
                   - codebuild:StartBuild
                   - codebuild:BatchGetBuilds
                   - codebuild:StopBuild
-                Resource: "*"
+                Resource: !Sub "arn:aws:codebuild:${AWS::Region}:${AWS::AccountId}:project/${EnvironmentName}-notify-build"
                 
               - Effect: Allow
                 Action:
