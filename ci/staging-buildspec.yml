@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Packaging templates...
       - aws s3 sync cloudformation/child-templates/ s3://iac-bucket-azamcloud/ 
-      - aws cloudformation deploy --template-file cloudformation/master/masterstack.yaml --stack-name dev-event-driven-notification-stack --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://cloudformation/params/staging-params.json  
+      - aws cloudformation deploy --template-file cloudformation/master/masterstack.yaml --stack-name staging-event-driven-notification-stack --capabilities CAPABILITY_NAMED_IAM --parameter-overrides file://cloudformation/params/staging-params.json  
 
 artifacts:
   files:
