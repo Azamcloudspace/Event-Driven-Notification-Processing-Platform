@@ -122,7 +122,7 @@ Resources:
               ActionTypeId:
                 Category: Source
                 Owner: AWS
-                Provider: CodeStarSourceConnection
+                Provider: CodestarSourceConnection
                 Version: "1"
               Configuration:
                 ConnectionArn: !Ref CodestarConnectionArn
