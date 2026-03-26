@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+
+  build:
+    commands:
+      - aws cloudformation deploy --template-file infrastructure-pipe/infrastructure-pipeline.yaml --stack-name Infrastructure-Pipeline --capabilities CAPABILITY_NAMED_IAM --role-arn arn:aws:iam::975050225555:role/CloudFormationExecutionRole
+
+artifacts:
+  files:
+    - '**/*'
