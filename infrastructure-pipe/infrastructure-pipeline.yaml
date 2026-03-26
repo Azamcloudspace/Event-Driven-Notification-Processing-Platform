@@ -20,7 +20,7 @@ Resources:
   ArtifactStoreBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub "${AWS::AccountId}-Infrastructure-artifacts"
+      BucketName: !Sub "${AWS::AccountId}-infrastructure-artifacts"
   
   CodeBuildRole:
     Type: AWS::IAM::Role
