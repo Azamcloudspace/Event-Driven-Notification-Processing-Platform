@@ -12,7 +12,7 @@ Parameters:
     Type: String
     Default: main
 
-  CodeStarConnectionArn:
+  CodestarConnectionArn:
     Type: String
 
 Resources:
@@ -95,7 +95,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - codestar-connections:UseConnection
-                Resource: !Ref CodeStarConnectionArn
+                Resource: !Ref CodestarConnectionArn
 
               - Effect: Allow
                 Action:
