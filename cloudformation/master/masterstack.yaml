@@ -17,21 +17,21 @@ Resources:
   S3Stack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.us-east-1.amazonaws.com/s3.yaml
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/s3.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
   SNSStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.us-east-1.amazonaws.com/sns.yaml
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/sns.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
   EventStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.us-east-1.amazonaws.com/event.yaml
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/event.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         InputBucket: !GetAtt S3Stack.Outputs.InputBucketName
@@ -40,7 +40,7 @@ Resources:
   LambdaStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.us-east-1.amazonaws.com/lambdafunc.yaml
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/lambdafunc.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         LargeFileTopic: !GetAtt SNSStack.Outputs.LargeFileTopicName
@@ -50,7 +50,7 @@ Resources:
   CodePipelineStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.us-east-1.amazonaws.com/pipeline.yaml
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/pipeline.yaml
       Parameters:
         EnvironmentName: !Ref EnvironmentName
         GitHubOwner: !Ref GitHubOwner
