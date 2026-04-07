@@ -21,33 +21,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub "${AWS::AccountId}-Infrastructure-artifacts"
-  
-  CloudFormationExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: CloudFormationExecutionRole
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: cloudformation.amazonaws.com
-            Action: sts:AssumeRole
-
-      Policies:
-        - PolicyName: FullAccessForStackCreation
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-
-              - Effect: Allow
-                Action:
-                  - lambda:*
-                  - events:*
-                  - codepipeline:*
-                  - sns:*
-                  - s3:*
-                Resource: "*"
 
   CodeBuildRole:
     Type: AWS::IAM::Role
@@ -81,7 +54,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - iam:PassRole
-                Resource: !GetAtt CloudFormationExecutionRole.Arn
+                Resource: "*"
 
               - Effect: Allow
                 Action:
