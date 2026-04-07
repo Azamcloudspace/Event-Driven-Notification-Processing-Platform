@@ -5,13 +5,6 @@ Parameters:
     Type: String
 
 Resources:
-  LambdaCodeBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub "${EnvironmentName}-${AWS::AccountId}-lambda-code-bucket"
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
 
   InputBucket:
     Type: AWS::S3::Bucket
