@@ -43,6 +43,7 @@ Resources:
 
               - Effect: Allow
                 Action:
+                  - s3:ListBucket
                   - s3:GetObject
                   - s3:GetObjectVersion
                   - s3:PutObject
@@ -50,6 +51,8 @@ Resources:
                 Resource:
                   - !Sub "arn:aws:s3:::${ArtifactStoreBucket}"
                   - !Sub "arn:aws:s3:::${ArtifactStoreBucket}/*"
+                  - arn:aws:s3:::iac-bucket-azamclouds
+                  - arn:aws:s3:::iac-bucket-azamclouds/*
 
               - Effect: Allow
                 Action:
