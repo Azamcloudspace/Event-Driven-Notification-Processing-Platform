@@ -1,5 +1,7 @@
 #  Event-Driven Notification Processing Platform
 
+---
+
 ##  Project Summary
 
 Designed and implemented a serverless, event-driven notification platform on AWS that processes file upload events in real time and routes notifications to relevant stakeholders based on defined business rules.
@@ -40,14 +42,10 @@ S3 Upload → EventBridge → Lambda → SNS → Email Notifications
   - Stores uploaded files  
   - Emits `Object Created` events  
 
----
-
 #### Event Routing
 - **Amazon EventBridge**
   - Receives S3 events  
   - Filters and routes events to Lambda  
-
----
 
 #### Processing Layer
 - **AWS Lambda**
@@ -55,14 +53,10 @@ S3 Upload → EventBridge → Lambda → SNS → Email Notifications
   - Processes file metadata  
   - Applies business rules  
 
----
-
 #### Notification Layer
 - **Amazon SNS**
   - Publishes notifications to different topics  
   - Sends email alerts to subscribed users  
-
----
 
 #### Security
 - **AWS IAM**
@@ -90,13 +84,9 @@ The Lambda function evaluates uploaded files and routes notifications:
 
 This project uses **AWS CloudFormation** with a **nested stack setup**. One main stack (master) controls multiple smaller stacks, each handling a specific service.
 
----
-
 ### Stack Structure
 
 S3 Stack –> SNS Stack –> Lambda Stack–> Event Stack –> CodePipeline Stack
-
----
 
 ### How the Stacks Connect
 
@@ -106,16 +96,12 @@ They share data using:
 - **Parameters** – Pass values into a stack  
 - **Outputs** – Share values from a stack  
 
----
-
 ### Design Idea
 
 Stacks are modular but not fully independent.  
 Some stacks require values (like ARNs, bucket names) from other stacks to function as designed.
 
 This is handled using **output → parameter passing**, keeping things structured and connected.
-
----
 
 ### Result
 
@@ -124,11 +110,10 @@ This is handled using **output → parameter passing**, keeping things structure
 - Reusable across different environments
   
 ---
+
 ##  CI/CD Architecture
 
 This project uses a **two-pipeline DevOps model**:
-
----
 
 ### 1. Infrastructure Pipeline
 
@@ -165,11 +150,8 @@ Mutiple Codebuild services are used for the different environments with their in
 
 - Provisions `cloudformation/master/masterstack.yaml` template child stacks resources 
 
-
 ![Pipeline](/screenshots/Screenshot5.png)
 Screenshot of Infrastructure Pipeline
-
----
 
 ### 2. Application Pipeline
 
@@ -196,7 +178,6 @@ via `buildspec.yml`
  
 - Updates function without affecting infrastructure  
 
-
 ![Pipeline](/screenshots/Screenshot4.png)
 Screenshot of Application Pipeline 
 
@@ -212,8 +193,6 @@ Infrastructure Pipeline
 
 ![Deployment](/screenshots/Screenshot6.png)
 Screenshot of Cloudformation Deployment (Prod Environment)
-
----
 
 ### Continuous Delivery
 
@@ -247,9 +226,7 @@ Lambda Updated
 │ ├── master/
 │ └── params/
 ```
-
 ---
-
 
 ##  Automation
 
@@ -331,6 +308,8 @@ Large File Screenshot
 
 ![Testing](/screenshots/Screenshot12.jpeg)
 finance/ File Screenshot
+
+---
 
 ## Conclusion
 
