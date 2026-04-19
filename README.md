@@ -99,13 +99,34 @@ Responsible for provisioning and updating AWS resources.
 **Workflow:**
 
 ```
-GitHub → CodePipeline → CodeBuild → CloudFormation → Environment Deployment
+CodePipeline → GitHub(Source) → CodeBuild(Build) → CloudFormation → Environment Deployment
 ```
 
 **Capabilities:**
-- Deploys S3, Lambda, EventBridge, SNS, IAM  
-- Supports dev, staging, prod environments  
-- Uses manual approval gates for controlled releases  
+
+**Codepipeline**
+
+- Integrates with services such as GitHub and CodeBuild
+- Automatically triggers and executes workflows
+- Uses manual approval gates to control promotion between stages
+- Implements properly structured IAM permissions across services
+
+**GitHub**
+
+- Repository (Source)
+
+**CodeBuild**
+
+Mutiple Codebuild services are used for the different environments with their individual builspec.yml i.e `dev-buidspec.yml`, `staging-buildspec.yml`, andn`prod-buildspec.yml` respectively , their capabilities are :
+
+- Uploads all nested CloudFormation templates to an S3 bucket for stack referencing
+- Deploys the `cloudformation/master/masterstack.yaml` template
+- Implements properly structured IAM permissions across services
+
+**Cloudformation**
+
+- Provisions `cloudformation/master/masterstack.yaml` template child stacks resources 
+
 
 ![Pipeline](/screenshots/Screenshot5.png)
 Screenshot of Infrastructure Pipeline
@@ -119,14 +140,24 @@ Handles Lambda code updates independently of infrastructure.
 **Workflow:**
 
 ```
-GitHub → CodeBuild → Package Lambda → Deploy Update
+GitHub(Source) → CodeBuild(Build) → Lambda(Deploy)
 ```
 
-
 **Responsibilities:**
-- Packages Lambda code (`app.py`)  
+
+**GitHub**
+
+- Repository (Source)
+
+**CodeBuild(Build)**
+
+- Copies the app.py file from the app/ directory to the root
+- Outputs the `app.py` file as a build artifact
+
+**Lambda(Deploy)**
+ 
 - Updates function without affecting infrastructure  
-- Maintains deployment consistency across environments  
+
 
 ![Pipeline](/screenshots/Screenshot4.png)
 Screenshot of Application Pipeline 
@@ -181,11 +212,12 @@ Lambda Updated
 
 ---
 
+
 ##  Automation
 
 - Infrastructure fully defined in CloudFormation  
-- Build and packaging handled via `buildspec.yml`  
-- Lambda deployment automated through pipelines  
+- Build and packaging handled via buildspecs
+- Lambda function updates automated through pipelines  
 - Environment-specific parameterization for consistency  
 
 ---
