@@ -150,7 +150,7 @@ GitHub(Source) → CodeBuild(Build) → Lambda(Deploy)
 - Repository (Source)
 
 **CodeBuild(Build)**
-
+via `buildspec.yml`
 - Copies the app.py file from the app/ directory to the root
 - Outputs the `app.py` file as a build artifact
 
