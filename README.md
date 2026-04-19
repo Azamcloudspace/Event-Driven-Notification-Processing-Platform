@@ -86,6 +86,44 @@ The Lambda function evaluates uploaded files and routes notifications:
 
 ---
 
+## Infrastructure as Code (IaC) – AWS CloudFormation
+
+This project uses **AWS CloudFormation** with a **nested stack setup**. One main stack (master) controls multiple smaller stacks, each handling a specific service.
+
+---
+
+### Stack Structure
+
+S3 Stack –> SNS Stack –> Lambda Stack–> Event Stack –> CodePipeline Stack
+
+---
+
+### How the Stacks Connect
+
+Stacks are separated for organization
+They share data using:
+
+- **Parameters** – Pass values into a stack  
+- **Outputs** – Share values from a stack  
+
+---
+
+### Design Idea
+
+Stacks are modular but not fully independent.  
+Some stacks require values (like ARNs, bucket names) from other stacks to function as designed.
+
+This is handled using **output → parameter passing**, keeping things structured and connected.
+
+---
+
+### Result
+
+- Clean structure  
+- Easy to update  
+- Reusable across different environments
+  
+---
 ##  CI/CD Architecture
 
 This project uses a **two-pipeline DevOps model**:
