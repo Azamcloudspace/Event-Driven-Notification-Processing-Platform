@@ -181,6 +181,27 @@ via `buildspec.yml`
 ![Pipeline](/screenshots/Screenshot4.png)
 Screenshot of Application Pipeline 
 
+
+### Detailed Flow
+```
+(GitHub)
+        ↓
+Infrastructure Pipeline (if infrastructure changes detected)
+        ↓
+CloudFormation Deployment (S3, SNS, Lambda, EventBridge, Pipelines)
+        ↓
+Application Pipeline Triggered
+        ↓
+CodeBuild → Package Lambda Code
+        ↓
+Deploy Updated Artifact
+        ↓
+Lambda Function Updated
+        ↓
+EventBridge Triggers Execution
+        ↓
+SNS Notifications Sent
+```
 ---
 
 ##  Deployment Lifecycle
