@@ -28,15 +28,6 @@ Resources:
       Parameters:
         EnvironmentName: !Ref EnvironmentName
 
-  EventStack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/event.yaml
-      Parameters:
-        EnvironmentName: !Ref EnvironmentName
-        InputBucket: !GetAtt S3Stack.Outputs.InputBucketName
-        NotifyLambda: !GetAtt LambdaStack.Outputs.NotificationProcessorLambdaArn
-
   LambdaStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -46,6 +37,15 @@ Resources:
         LargeFileTopic: !GetAtt SNSStack.Outputs.LargeFileTopicName
         DataTeamTopic: !GetAtt SNSStack.Outputs.DataTeamTopicName
         FinanceTeamTopic: !GetAtt SNSStack.Outputs.FinanceTeamTopicName
+
+  EventStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://iac-bucket-azamclouds.s3.eu-central-1.amazonaws.com/event.yaml
+      Parameters:
+        EnvironmentName: !Ref EnvironmentName
+        InputBucket: !GetAtt S3Stack.Outputs.InputBucketName
+        NotifyLambda: !GetAtt LambdaStack.Outputs.NotificationProcessorLambdaArn
         
   CodePipelineStack:
     Type: AWS::CloudFormation::Stack
