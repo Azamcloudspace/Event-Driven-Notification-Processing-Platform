@@ -209,7 +209,7 @@ SNS Notifications Sent
 ### Initial Provisioning
 
 Infrastructure Pipeline  
-→ CloudFormation Deployment  
+→ CloudFormation Deployment of mutiple environments
 → Resources Created (S3, Lambda, EventBridge, SNS, Pipelines)
 
 ![Deployment](/screenshots/Screenshot6.png)
