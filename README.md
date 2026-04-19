@@ -86,7 +86,20 @@ This project uses **AWS CloudFormation** with a **nested stack setup**. One main
 
 ### Stack Structure
 
-S3 Stack –> SNS Stack –> Lambda Stack–> Event Stack –> CodePipeline Stack
+```
+
+  S3Stack        SNSStack
+    |              ↓
+                Lambda 
+    |              ↓   \
+          ->     Event   \ ->  CodePipeline
+
+## Key
+
+- ↓ → dependency order  
+- Same level → deployed in parallel 
+
+```
 
 ### How the Stacks Connect
 
